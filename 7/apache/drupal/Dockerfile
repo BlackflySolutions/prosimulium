@@ -6,7 +6,8 @@ RUN pecl install -o redis \
   && docker-php-ext-enable redis
 # Add a way to send mail out, assume the host can do mail. 
 # Use iproute2 to figure my ip route out to the host.
-RUN apt-get update && apt-get install -y ssmtp iproute2 && \
+# Install openssh-client for outgoing https requests!
+RUN apt-get update && apt-get install -y ssmtp openssh-client iproute2 && \
   apt-get clean && \
   echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf && \
   echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
