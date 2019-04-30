@@ -10,6 +10,7 @@ COPY admin.sh admindb.sh restoredb.sh setup.sh wait-for-it.sh /usr/local/bin/
 RUN chmod ugo+x /usr/local/bin/drush && chmod ugo+x /usr/local/bin/*.sh 
 COPY admin.conf /etc/apache2/conf-available
 RUN a2enconf admin
+RUN mkdir /var/www/.drush && chown www-data:www-data /var/www/.drush && sudo -E -u www-data drush -y @none dl --destination=/var/www/.drush registry_rebuild-7.x
 # CMD["apache2-foreground"]
-# Run the same initialization script that the web (drupal) does, and then the admin one.
-CMD /usr/local/bin/initialize.sh && /usr/local/bin/admin.sh && apache2-foreground
+# Run the same initialization script that the web (drupal) does.
+CMD /usr/local/bin/initialize.sh && apache2-foreground
