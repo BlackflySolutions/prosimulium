@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y ssmtp imagemagick openssh-client iprout
   echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
 # handle the varnish+hitch proxying
 RUN echo 'SetEnvIf X-Forwarded-Proto https HTTPS=on' >> /var/www/html/.htaccess
+# add the exif extension
+RUN docker-php-ext-install exif
 # increase php timeout and other customizations
 COPY vhttp.ini /usr/local/etc/php/conf.d/
 COPY vhttp.conf /etc/apache2/conf-available/
