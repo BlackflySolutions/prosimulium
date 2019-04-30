@@ -7,7 +7,7 @@ RUN pecl install -o redis \
 # Add a way to send mail out, assume the host can do mail. 
 # Use iproute2 to figure my ip route out to the host.
 # Install openssh-client for outgoing https requests!
-RUN apt-get update && apt-get install -y ssmtp openssh-client iproute2 && \
+RUN apt-get update && apt-get install -y ssmtp imagemagick openssh-client iproute2 && \
   apt-get clean && \
   echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf && \
   echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
