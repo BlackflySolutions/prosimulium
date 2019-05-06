@@ -5,6 +5,7 @@ RUN apt-get update \
   && apt-get purge -y
 COPY drush.phar /usr/local/bin/drush
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
+RUN useradd -u 1978 -g www-data -ms /bin/bash drupal
 COPY default.settings.php settings.php /usr/local/src/
 COPY admin.sh admindb.sh restoredb.sh setup.sh wait-for-it.sh /usr/local/bin/
 RUN chmod ugo+x /usr/local/bin/drush && chmod ugo+x /usr/local/bin/*.sh 
