@@ -8,7 +8,8 @@ COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN useradd -u 1978 -g www-data -ms /bin/bash drupal
 COPY default.settings.php settings.php /usr/local/src/
 COPY admin.sh admindb.sh restoredb.sh setup.sh wait-for-it.sh /usr/local/bin/
-RUN chmod ugo+x /usr/local/bin/drush && chmod ugo+x /usr/local/bin/*.sh 
+RUN curl -LsS https://download.civicrm.org/cv/cv.phar -o /usr/local/bin/cv
+RUN chmod ugo+x /usr/local/bin/drush && chmod ugo+x /usr/local/bin/cv && chmod ugo+x /usr/local/bin/*.sh 
 COPY admin.conf /etc/apache2/conf-available
 RUN a2enconf admin
 RUN mkdir /var/www/.drush && chown www-data:www-data /var/www/.drush && sudo -E -u www-data drush -y @none dl --destination=/var/www/.drush registry_rebuild-7.x
