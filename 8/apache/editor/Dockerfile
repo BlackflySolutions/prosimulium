@@ -1,5 +1,5 @@
 # FROM blackflysolutions/prosimulium:7-apache-admin
-FROM prosimulium:8-6-apache-admin
+FROM blackflysolutions/prosimulium:8-apache-admin
 # an extended version of the admin image, adding extra packages and scripts
 RUN apt-get update \
   && apt-get install -y emacs sassc nodejs \

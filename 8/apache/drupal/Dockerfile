@@ -1,5 +1,5 @@
 # an extended version of the drupal-civicrm container, specific to the prosimulium hosting architecture
-FROM blackflysolutions/drupal:8-6-apache-civicrm-5
+FROM blackflysolutions/drupal:8-apache-civicrm-5
 #RUN a2enmod rewrite
 #RUN a2enmod expires
 RUN pecl install -o redis \
