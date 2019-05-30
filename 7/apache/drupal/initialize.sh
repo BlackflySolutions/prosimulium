@@ -15,7 +15,10 @@ fi
 #  mkdir /var/www/drupal
 #  cd /var/www/drupal
 #  ln -s /var/www/html git-7
-#if [ -d "/var/www/html/sites/default/patch" ]; then
+if [ -f "/var/www/html/sites/default/conf/apache-custom.conf" ]; then
+  cp /var/www/html/sites/default/conf/apache-custom.conf /etc/apache2/conf-available/vsite-custom.conf
+  a2enconf vsite-custom
+fi 
 #  cd /var/www/html
 #  for f in sites/default/patch/*.patch ; do patch -p1 < "$f" ; done
 #fi
