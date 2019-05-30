@@ -1,5 +1,5 @@
 # an extended version of the webserver image for administration
-FROM blackflysolutions/prosimulium:8-6-apache
+FROM prosimulium:8-6-apache
 # run apache as minimally as possible with a custom conf file
 COPY admin.conf /etc/apache2/conf-available
 RUN a2enconf admin
@@ -25,6 +25,7 @@ RUN chown drupal:www-data /var/www/drupal
 COPY admindb.sh /usr/local/bin/admindb.sh
 # the admin.sh script will initialize the volumes if it's an empty site
 COPY admin.sh /usr/local/bin/admin.sh
+COPY drupal-core-upgrade.sh /usr/local/bin/drupal-core-upgrade.sh
 RUN chmod ugo+x /usr/local/bin/*.sh 
 RUN curl -LsS https://download.civicrm.org/cv/cv.phar -o /usr/local/bin/cv
 RUN chmod ugo+x /usr/local/bin/cv 
