@@ -1,13 +1,14 @@
 # an extended version of the webserver image, adding extra packages and scripts
-FROM blackflysolutions/prosimulium:7-apache
+# FROM blackflysolutions/prosimulium:7-apache
+FROM prosimulium:7-apache
 RUN apt-get update \
-  && apt-get install -y mariadb-client sudo vim git zip unzip netcat \
+  && apt-get install -y mariadb-client sudo vim zip unzip netcat \
   && apt-get purge -y
 COPY drush.phar /usr/local/bin/drush
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN useradd -u 1978 -g www-data -ms /bin/bash drupal
 COPY default.settings.php settings.php /usr/local/src/
-COPY admin.sh admindb.sh restoredb.sh setup.sh wait-for-it.sh /usr/local/bin/
+COPY admin.sh admindb.sh restoredb.sh setup.sh wait-for-it.sh backupdb.sh backupsite.sh /usr/local/bin/
 RUN curl -LsS https://download.civicrm.org/cv/cv.phar -o /usr/local/bin/cv
 RUN chmod ugo+x /usr/local/bin/drush && chmod ugo+x /usr/local/bin/cv && chmod ugo+x /usr/local/bin/*.sh 
 COPY admin.conf /etc/apache2/conf-available
