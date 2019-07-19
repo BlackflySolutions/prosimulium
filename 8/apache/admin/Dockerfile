@@ -1,6 +1,6 @@
-# an extended version of the webserver image for administration
-FROM blackflysolutions/prosimulium:8-apache
-#FROM prosimulium:8-apache
+# an extended version of the prosimulium webserver image for administration
+ARG REPOSITORY_FROM=blackflysolutions/
+FROM ${REPOSITORY_FROM}prosimulium:8-apache
 # run apache as minimally as possible with a custom conf file
 COPY admin.conf /etc/apache2/conf-available
 RUN a2enconf admin
