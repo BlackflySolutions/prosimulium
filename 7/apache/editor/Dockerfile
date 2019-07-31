@@ -1,5 +1,6 @@
-FROM blackflysolutions/prosimulium:7-apache-admin
 # an extended version of the admin image, adding extra packages and scripts
+ARG REPOSITORY_FROM=blackflysolutions/
+FROM ${REPOSITORY_FROM:-}prosimulium:7-apache-admin
 RUN apt-get update \
   && apt-get install -y emacs sassc nodejs \
   && apt-get purge -y

@@ -1,6 +1,6 @@
 # an extended version of the webserver image, adding extra packages and scripts
-# FROM blackflysolutions/prosimulium:7-apache
-FROM prosimulium:7-apache
+ARG REPOSITORY_FROM=blackflysolutions/
+FROM ${REPOSITORY_FROM:-}prosimulium:7-apache
 RUN apt-get update \
   && apt-get install -y mariadb-client sudo vim zip unzip netcat \
   && apt-get purge -y
