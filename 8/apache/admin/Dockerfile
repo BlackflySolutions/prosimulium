@@ -1,5 +1,6 @@
-# an extended version of the webserver image for administration
-FROM prosimulium:8-6-apache
+# an extended version of the prosimulium webserver image for administration
+ARG REPOSITORY_FROM=blackflysolutions/
+FROM ${REPOSITORY_FROM}prosimulium:8-apache
 # run apache as minimally as possible with a custom conf file
 COPY admin.conf /etc/apache2/conf-available
 RUN a2enconf admin
@@ -22,14 +23,11 @@ RUN npm install -g bower
 # note that this user does not exist in the vhttp/run image!
 RUN useradd -u 1978 -g www-data -ms /bin/bash drupal
 RUN chown drupal:www-data /var/www/drupal
-COPY admindb.sh /usr/local/bin/admindb.sh
-# the admin.sh script will initialize the volumes if it's an empty site
-COPY admin.sh /usr/local/bin/admin.sh
-COPY drupal-core-upgrade.sh /usr/local/bin/drupal-core-upgrade.sh
+# copy all my scripts into /usr/local/bin
+COPY *.sh /usr/local/bin/
 RUN chmod ugo+x /usr/local/bin/*.sh 
 RUN curl -LsS https://download.civicrm.org/cv/cv.phar -o /usr/local/bin/cv
 RUN chmod ugo+x /usr/local/bin/cv 
-#CMD["apache2-foreground"]
 # Run the same initialization script that vhttp does, and then the admin one.
 # CMD apache2-foreground
 CMD /usr/local/bin/initialize.sh && /usr/local/bin/admin.sh && apache2-foreground
