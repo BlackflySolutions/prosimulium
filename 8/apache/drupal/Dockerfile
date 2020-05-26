@@ -1,6 +1,7 @@
 # an extended version of the drupal-civicrm container, specific to the prosimulium hosting architecture
 ARG REPOSITORY_FROM=blackflysolutions/
 FROM ${REPOSITORY_FROM}drupal:8-apache-civicrm-5
+RUN a2enmod expires
 RUN pecl install -o redis \
   && docker-php-ext-enable redis
 # Add a way to send mail out, assume the host can do mail. 
