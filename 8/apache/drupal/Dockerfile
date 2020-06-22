@@ -7,11 +7,11 @@ RUN pecl install -o apcu && docker-php-ext-enable apcu
 # Add a way to send mail out, assume the host can do mail. 
 # Use iproute2 to figure my ip route out to the host.
 # Install openssh-client for outgoing https requests!
-RUN apt-get update && apt-get install -y ssmtp imagemagick openssh-client iproute2 git && \
+RUN apt-get update && apt-get install -y msmtp imagemagick openssh-client iproute2 git && \
   pecl install -o imagick-3.4.3 && docker-php-ext-enable imagick && \
   apt-get clean && \
-  echo "FromLineOverride=YES" >> /etc/ssmtp/ssmtp.conf && \
   echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
+RUN cp msmtprc /etc/msmtprc
 # handle the varnish+hitch proxying
 RUN echo 'SetEnvIf X-Forwarded-Proto https HTTPS=on' >> /var/www/html/.htaccess
 # add the exif extension
