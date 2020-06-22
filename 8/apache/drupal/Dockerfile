@@ -2,8 +2,8 @@
 ARG REPOSITORY_FROM=blackflysolutions/
 FROM ${REPOSITORY_FROM}drupal:8-apache-civicrm-5
 RUN a2enmod expires
-RUN pecl install -o redis \
-  && docker-php-ext-enable redis
+RUN pecl install -o redis && docker-php-ext-enable redis
+RUN pecl install -o apcu && docker-php-ext-enable apcu
 # Add a way to send mail out, assume the host can do mail. 
 # Use iproute2 to figure my ip route out to the host.
 # Install openssh-client for outgoing https requests!
