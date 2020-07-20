@@ -10,8 +10,8 @@ RUN pecl install -o apcu && docker-php-ext-enable apcu
 RUN apt-get update && apt-get install -y msmtp imagemagick openssh-client iproute2 git && \
   pecl install -o imagick-3.4.3 && docker-php-ext-enable imagick && \
   apt-get clean && \
-  echo 'sendmail_path = "/usr/sbin/ssmtp -t"' > /usr/local/etc/php/conf.d/mail.ini
-RUN cp msmtprc /etc/msmtprc
+  echo 'sendmail_path = "/usr/bin/msmtp -C /etc/msmtprc -t"' > /usr/local/etc/php/conf.d/mail.ini
+COPY msmtprc /etc/msmtprc
 # handle the varnish+hitch proxying
 RUN echo 'SetEnvIf X-Forwarded-Proto https HTTPS=on' >> /var/www/html/.htaccess
 # add the exif extension
