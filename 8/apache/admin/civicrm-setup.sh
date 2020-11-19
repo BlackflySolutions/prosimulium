@@ -9,7 +9,7 @@ if [ ! -f /var/www/drupal/web/sites/default/civicrm_settings.php ]; then
   curl -LsS https://download.civicrm.org/cv/cv.phar -o /usr/local/bin/cv
   chmod +x /usr/local/bin/cv
   sudo -E -u www-data drush -y pm:enable civicrmtheme
-  cv api Setting.create userFrameworkResourceURL="[cms.root]/libraries/civicrm/"
+  # cv api Setting.create userFrameworkResourceURL="[cms.root]/libraries/civicrm/core/"
   echo "CiviCRM setup complete";
 else 
   echo "Found existing setup, aborted";

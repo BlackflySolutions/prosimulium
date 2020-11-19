@@ -13,8 +13,8 @@ RUN curl -L -o /usr/local/bin/drush https://github.com/drush-ops/drush-launcher/
 RUN chmod ugo+x /usr/local/bin/drush
 # wait-for-it script because I need a working sql container before installing
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
-# add composer
-RUN curl --silent --show-error https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin
+# add composer, still need version 1 for civicrm as of Nov 19 2020
+RUN curl --silent --show-error https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin --1
 # add additional dependencies for installing civicrm with D8 + composer
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
 RUN apt-get install -y nodejs

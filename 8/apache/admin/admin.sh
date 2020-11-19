@@ -6,6 +6,7 @@ if [ -z "$(ls -A /var/www/drupal)" ]; then
   cd /var/www/drupal
   chown drupal .
   sudo -u drupal composer create-project drupal/recommended-project:${VSITE_DRUPAL_VER} . --no-interaction  --no-install
+# will not be needed with composer 2 in the future:
   sudo -u drupal composer require --no-update drush/drush zaporylie/composer-drupal-optimizations:^1.1 --dev
   sudo -u drupal composer update
   chmod g+w web/sites/default/
