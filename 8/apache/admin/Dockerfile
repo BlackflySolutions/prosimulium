@@ -6,7 +6,7 @@ COPY admin.conf /etc/apache2/conf-available
 RUN a2enconf admin
 # add extra packages and scripts
 RUN apt-get update \
-  && apt-get install -y mariadb-client sudo vim git zip unzip netcat \
+  && apt-get install -y mariadb-client sudo vim git zip unzip netcat rsync ssh \
   && apt-get purge -y
 # drush launcher: drush is/was installed by composer
 RUN curl -L -o /usr/local/bin/drush https://github.com/drush-ops/drush-launcher/releases/download/0.6.0/drush.phar
