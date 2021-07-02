@@ -25,8 +25,8 @@ if  [[ '-y' != $ARG1 ]]; then
       esac
   done
 fi
-sudo -u drupal php -d memory_limit=-1 /usr/local/bin/composer update
+sudo -u drupal COMPOSER_COMPILE=all php -d memory_limit=-1 /usr/local/bin/composer update
 cv upgrade:db
 chown -R www-data:www-data web/sites/default/files/civicrm
 # support external scripts, reluctantly
-echo 'RewriteEngine Off' > /var/www/drupal/web/libraries/civicrm/extern/.htaccess
+# echo 'RewriteEngine Off' > /var/www/drupal/web/libraries/civicrm/extern/.htaccess
