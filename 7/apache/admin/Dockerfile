@@ -2,7 +2,7 @@
 ARG REPOSITORY_FROM=blackflysolutions/
 FROM ${REPOSITORY_FROM:-}prosimulium:7-apache
 RUN apt-get update \
-  && apt-get install -y mariadb-client sudo vim zip unzip netcat \
+  && apt-get install -y mariadb-client sudo vim zip unzip netcat ssh rsync \
   && apt-get purge -y
 COPY drush.phar /usr/local/bin/drush
 COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
