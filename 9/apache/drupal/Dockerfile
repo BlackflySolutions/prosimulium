@@ -12,8 +12,6 @@ RUN apt-get update && apt-get install -y msmtp imagemagick openssh-client iprout
   apt-get clean && \
   echo 'sendmail_path = "/usr/bin/msmtp -C /etc/msmtprc -t"' > /usr/local/etc/php/conf.d/mail.ini
 COPY msmtprc /etc/msmtprc
-# handle the varnish+hitch proxying
-RUN echo 'SetEnvIf X-Forwarded-Proto https HTTPS=on' >> /var/www/html/.htaccess
 # add the exif and tidy extensions
 RUN docker-php-ext-install exif tidy && docker-php-ext-enable tidy
 # increase php timeout and other customizations
