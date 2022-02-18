@@ -7,7 +7,8 @@ RUN pecl install -o redis \
 # Add a way to send mail out, assume the host can do mail. 
 # Use iproute2 to figure my ip route out to the host.
 # Install openssh-client for outgoing https requests!
-RUN apt-get update && apt-get install -y msmtp imagemagick openssh-client iproute2 git && \
+RUN apt-get update && apt-get install -y msmtp imagemagick openssh-client iproute2 git libmcrypt-dev && \
+  pecl install -o mcrypt-1.0.4 && docker-php-ext-enable mcrypt && \
   pecl install -o imagick-3.4.3 && docker-php-ext-enable imagick && \
   apt-get clean && \
   echo 'sendmail_path = "/usr/bin/msmtp -C /etc/msmtprc -t"' > /usr/local/etc/php/conf.d/mail.ini
