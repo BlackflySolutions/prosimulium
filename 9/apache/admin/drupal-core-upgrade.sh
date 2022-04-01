@@ -23,5 +23,5 @@ if  [[ '-y' != $ARG1 ]]; then
   done
 fi
 sudo -u drupal php -d memory_limit=-1 /usr/local/bin/composer update
-sudo -E -u www-data drush updatedb
+sudo -E -u www-data drush updatedb -y
 sudo -E -u www-data drush cr
