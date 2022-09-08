@@ -16,7 +16,7 @@ COPY wait-for-it.sh /usr/local/bin/wait-for-it.sh
 # add composer, using (default) version 2 as of Jan 18
 RUN curl --silent --show-error https://getcomposer.org/installer | php -- --filename=composer --install-dir=/usr/local/bin 
 # add additional dependencies for installing civicrm with D9 + composer
-RUN curl -sL https://deb.nodesource.com/setup_12.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install -g bower
 # create a user to own the drupal code and run the build process
